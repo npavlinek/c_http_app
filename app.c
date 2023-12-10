@@ -108,7 +108,7 @@ int main(void) {
         sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
         if (sock == INVALID_SOCKET_HANDLE) continue;
 
-        if (bind(sock, p->ai_addr, (int)p->ai_addrlen)) {
+        if (bind(sock, p->ai_addr, (socklen_t)p->ai_addrlen)) {
             print_error("bind");
             close_socket(sock);
             sock = INVALID_SOCKET_HANDLE;

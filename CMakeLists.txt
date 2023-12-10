@@ -9,7 +9,14 @@ set(CMAKE_CONFIGURATION_TYPES Debug Release)
 set(CMAKE_C_STANDARD_LIBRARIES "")
 
 if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_C_FLAGS "-Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -pedantic")
+    set(CMAKE_C_FLAGS "-Weverything -Wno-declaration-after-statement -pedantic")
+
+    include(CheckCCompilerFlag)
+    check_c_compiler_flag("-Wunsafe-buffer-usage" CLANG_SUPPORTS_WUNSAFE_BUFFER_USAGE)
+    if(CLANG_SUPPORTS_WUNSAFE_BUFFER_USAGE)
+        string(APPEND CMAKE_C_FLAGS " -Wno-unsafe-buffer-usage")
+    endif()
+
     set(CMAKE_C_FLAGS_DEBUG "-g")
     set(CMAKE_C_FLAGS_RELEASE "-O3")
 
