@@ -133,7 +133,7 @@ int main(void) {
     }
 
     struct sockaddr_storage client_addr = {0};
-    int client_addr_size = (int)sizeof(client_addr);
+    socklen_t client_addr_size = sizeof(client_addr);
     socket_handle client_socket = accept(sock, (struct sockaddr *)&client_addr, &client_addr_size);
     if (client_socket == INVALID_SOCKET_HANDLE) {
         print_error("accept");
