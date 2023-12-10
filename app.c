@@ -108,6 +108,14 @@ int main(void) {
         sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
         if (sock == INVALID_SOCKET_HANDLE) continue;
 
+        const int enable = 1;
+        if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const void *)&enable, sizeof(enable))) {
+            print_error("setsockopt(SO_REUSEADDR)");
+            close_socket(sock);
+            sock = INVALID_SOCKET_HANDLE;
+            continue;
+        }
+
         if (bind(sock, p->ai_addr, (socklen_t)p->ai_addrlen)) {
             print_error("bind");
             close_socket(sock);
