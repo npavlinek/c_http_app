@@ -41,7 +41,12 @@
         return closesocket(socket);
     }
 #else
+    #include <arpa/inet.h>
+    #include <netdb.h>
+    #include <netinet/in.h>
     #include <sys/socket.h>
+    #include <sys/types.h>
+    #include <unistd.h>
 
     #define INVALID_SOCKET_HANDLE (-1)
     #define INVALID_SOCKET_RESULT (-1)
