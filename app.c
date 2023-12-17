@@ -18,12 +18,6 @@
 
     typedef SOCKET socket_handle;
 
-    enum {
-        SHUTDOWN_RECV = SD_RECEIVE,
-        SHUTDOWN_SEND = SD_SEND,
-        SHUTDOWN_BOTH = SD_BOTH
-    };
-
     static inline void print_error(const char *message) {
         fprintf(stderr, "%s: %s\n", message, gai_strerrorA(WSAGetLastError()));
     }
@@ -52,12 +46,6 @@
     #define INVALID_SOCKET_RESULT (-1)
 
     typedef int socket_handle;
-
-    enum {
-        SHUTDOWN_RECV = SHUT_RD,
-        SHUTDOWN_SEND = SHUT_WR,
-        SHUTDOWN_BOTH = SHUT_RDWR
-    };
 
     static inline void print_error(const char *message) {
         perror(message);
